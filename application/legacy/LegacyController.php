@@ -39,29 +39,44 @@ class LegacyController extends ShaarliVisitorController
     /** Legacy route: ?post= */
     public function post(Request $request, Response $response): Response
     {
-        $parameters = count($request->getQueryParams()) > 0 ? '?' . http_build_query($request->getQueryParams()) : '';
+        $route = '/admin/shaare';
+        $buildParameters = function (?array $parameters, bool $encode) {
+            if ($encode) {
+                $parameters = array_map('urlencode', $parameters);
+            }
+
+            return count($parameters) > 0 ? '?' . http_build_query($parameters) : '';
+        };
+
 
         if (!$this->container->loginManager->isLoggedIn()) {
-            return $this->redirect($response, '/login' . $parameters);
+            $parameters = $buildParameters($request->getQueryParams(), true);
+            return $this->redirect($response, '/login?returnurl='. $this->getBasePath() . $route . $parameters);
         }
 
-        return $this->redirect($response, '/admin/shaare' . $parameters);
+        $parameters = $buildParameters($request->getQueryParams(), false);
+
+        return $this->redirect($response, $route . $parameters);
     }
 
     /** Legacy route: ?addlink= */
     protected function addlink(Request $request, Response $response): Response
     {
+        $route = '/admin/add-shaare';
+
         if (!$this->container->loginManager->isLoggedIn()) {
-            return $this->redirect($response, '/login');
+            return $this->redirect($response, '/login?returnurl=' . $this->getBasePath() . $route);
         }
 
-        return $this->redirect($response, '/admin/add-shaare');
+        return $this->redirect($response, $route);
     }
 
     /** Legacy route: ?do=login */
     protected function login(Request $request, Response $response): Response
     {
-        return $this->redirect($response, '/login');
+        $returnUrl = $request->getQueryParam('returnurl');
+
+        return $this->redirect($response, '/login' . ($returnUrl ? '?returnurl=' . $returnUrl : ''));
     }
 
     /** Legacy route: ?do=logout */
@@ -126,5 +141,22 @@ class LegacyController extends ShaarliVisitorController
         $parameters = count($request->getQueryParams()) > 0 ? '?' . http_build_query($request->getQueryParams()) : '';
 
         return $this->redirect($response, '/feed/' . $feedType . $parameters);
+    }
+
+    /** Legacy route: ?do=configure */
+    protected function configure(Request $request, Response $response): Response
+    {
+        $route = '/admin/configure';
+
+        if (!$this->container->loginManager->isLoggedIn()) {
+            return $this->redirect($response, '/login?returnurl=' . $this->getBasePath() . $route);
+        }
+
+        return $this->redirect($response, $route);
+    }
+
+    protected function getBasePath(): string
+    {
+        return $this->container->basePath ?: '';
     }
 }
