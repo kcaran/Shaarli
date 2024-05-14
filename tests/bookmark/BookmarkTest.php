@@ -374,6 +374,9 @@ class BookmarkTest extends TestCase
     public function testRenameTag()
     {
         $bookmark = new Bookmark();
+        $bookmark->renameTag('chair', 'table');
+        $this->assertEquals([], $bookmark->getTags());
+
         $bookmark->setTags(['tag1', 'tag2', 'chair']);
         $bookmark->renameTag('chair', 'table');
         $this->assertEquals(['tag1', 'tag2', 'table'], $bookmark->getTags());
