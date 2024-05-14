@@ -2,11 +2,11 @@ name: Shaarli CI
 on: [push, pull_request]
 jobs:
   php:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+        php-versions: ['7.4', '8.0', '8.1', '8.2']
     name: PHP ${{ matrix.php-versions }}
     steps:
       - name: Set locales
@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get install gettext
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -38,10 +38,10 @@ jobs:
       - name: Update dependencies for PHP 8.x
         if: ${{ matrix.php-versions == '8.0' || matrix.php-versions == '8.1' }}
         run: |
-          composer update --ignore-platform-req=php && \
-          composer remove --dev --ignore-platform-req=php phpunit/phpunit && \
-          composer require --dev --ignore-platform-req=php phpunit/php-text-template ^2.0 && \
-          composer require --dev --ignore-platform-req=php phpunit/phpunit ^9.0
+          composer update && \
+          composer remove --dev phpunit/phpunit && \
+          composer require --dev phpunit/php-text-template ^2.0 && \
+          composer require --dev phpunit/phpunit ^9.0
 
       - name: Update dependencies for PHP 7.x
         if: ${{ matrix.php-versions != '8.0' && matrix.php-versions != '8.1' }}
@@ -60,13 +60,13 @@ jobs:
         run: make all_tests
 
   node:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '14.x'
 
@@ -83,18 +83,24 @@ jobs:
         run: make sasslint
 
   python:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          node-version: 3.8
-
-      - name: Install dependencies
-        run: pip install mkdocs
+          python-version: 3.8
 
       - name: Build documentation
-        run: mkdocs build --clean
+        run: make htmldoc
+
+  trivy-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run trivy scanner on repository (non-blocking)
+        run: make test_trivy_repo TRIVY_EXIT_CODE=0

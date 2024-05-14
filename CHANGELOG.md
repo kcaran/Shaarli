@@ -4,12 +4,156 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v0.12.2]() - UNRELEASED
+## [v0.13.0](https://github.com/shaarli/Shaarli/releases/tag/v0.12.3) - 2023-11-22
 
-> The `:master` Docker image is deprecated, please use `:latest` instead.
-> The `:stable` Docker image is deprecated, please use `:release` instead.
+> Major changes:
+>  - Security: Fix XSS vulnerability in tag search
+>  - Drop support for PHP 7.1, 7.2 and 7.3
 
-## [v0.12.1](https://github.com/shaarli/Shaarli/releases/tag/v0.12.0) - 2020-11-12
+### Added
+* Docker build: add ARM64 platform and bump Github action version by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/1965
+* github actions: build OCI images that contain both amd64 and armv7 by @nodiscc in https://github.com/shaarli/Shaarli/pull/1962
+* Expose tags_separator config through /info API by @amadeous in https://github.com/shaarli/Shaarli/pull/1997
+* tools: github actions: build docker images on pull requests by @nodiscc in https://github.com/shaarli/Shaarli/pull/2014
+* doc: server configuration: add PHP 8.2 to PHP compatibility table by @nodiscc in https://github.com/shaarli/Shaarli/pull/2021
+* Add shaarli-stack theme to Community-and-related-software.md by @dajare in https://github.com/shaarli/Shaarli/pull/2028
+* doc: document general.download_max_size/timeout configuration settings by @nodiscc in https://github.com/shaarli/Shaarli/pull/2036
+* doc: troubleshooting: automatic title retrieval fails when it is set by javascript by @nodiscc in https://github.com/shaarli/Shaarli/pull/2037
+
+### Changed
+* doc: update release procedure (merge the latest release to the release branch) + use the release branch for latest release version detection by @nodiscc in https://github.com/shaarli/Shaarli/pull/1960
+* Update german translation by @bschwede in https://github.com/shaarli/Shaarli/pull/1969
+* Update Server-configuration.md by @reinboldg in https://github.com/shaarli/Shaarli/pull/1973
+* Update Community-and-related-software.md by @nlegaillart in https://github.com/shaarli/Shaarli/pull/1984
+* doc: improve docs on usage of OR operator in tags search by @nodiscc in https://github.com/shaarli/Shaarli/pull/1987
+* docker: nginx: listen on IPv6 in addition to IPv4 by @cerebrate in https://github.com/shaarli/Shaarli/pull/1983
+* Doc update, WebSub (formerly PubSubHubbub) plugin by @clach04 in https://github.com/shaarli/Shaarli/pull/2008
+* doc: community/related software/integration with other platforms: add link to shaarli debian package by @nodiscc in https://github.com/shaarli/Shaarli/pull/2018
+* replace mkdocs with sphinx/myst-parser for HTML documentation generation, documentation improvements by @nodiscc in https://github.com/shaarli/Shaarli/pull/2025
+
+### Fixed
+* Makefile: Use GNU tar if available by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/1957
+* Support: ignore disk_free_space if the function is unavailable by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/1970
+* Documentation: fix broken link to 3rd party plugins by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/1975
+* Fix autofocus: load bulk action input on linklist only by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/1976
+* doc: fix mkdocs build warnings/relative links by @nodiscc in https://github.com/shaarli/Shaarli/pull/2015
+* correct usage of hyphens in all occurences of 'super fast, database-free' by @nodiscc in https://github.com/shaarli/Shaarli/pull/2003
+
+
+### Removed
+* Drop support for PHP 7.1, 7.2 and 7.3 by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/1958
+* doc: themes: remove unmaintained themes by @nodiscc in https://github.com/shaarli/Shaarli/pull/2030
+* doc: remove bountysource badge by @nodiscc in https://github.com/shaarli/Shaarli/pull/2035
+
+### Security
+* Fix XSS vulnerability in tag search by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/2039
+* tools: run trivy vulnerability scanner on the 'latest' docker image by @nodiscc in https://github.com/shaarli/Shaarli/pull/1980
+* github actions: fix value of TRIVY_TARGET_DOCKER_IMAGE by @nodiscc in https://github.com/shaarli/Shaarli/pull/1989
+* tools/CI: scan repository with trivy security scanner (yarn.lock, composer.lock) by @nodiscc in https://github.com/shaarli/Shaarli/pull/1998
+* tools/tests: update trivy to v0.44.0 by @nodiscc in https://github.com/shaarli/Shaarli/pull/2012
+* docker: update base alpine docker image to 3.16.7 by @nodiscc in https://github.com/shaarli/Shaarli/pull/2024
+
+**Full Changelog**: https://github.com/shaarli/Shaarli/compare/v0.12.2...v0.12.3
+
+## [v0.12.2](https://github.com/shaarli/Shaarli/releases/tag/v0.12.2) - 2023-03-18
+
+> Docker: use `ghcr.io/shaarli/shaarli` as Docker image instead of `shaarli/shaarli`.
+> The `:master` Docker image has been removed, please use `:latest` instead.
+> The `:stable` Docker image has been removed, please use `:release` instead.
+
+## Added
+
+- Bulk action: add or delete tag to multiple bookmarks
+- New Core Plugin: ReadItLater
+- Plugin system: allow plugins to provide custom routes 
+- Support search highlights when matching URL content
+- Support for OR (~) and optional AND (+) operators for tag search
+- Russian translation
+- Chinese translation
+- Export:
+  - Export: set a bookmark's LAST_MODIFIED attribute to its update timestamp
+  - Export: set a bookmark's PRIVATE attribute using an integer value 
+- Add an additional free disk space check before saving the datastore
+- curl: support HTTP/2 response code header
+- CI:
+  - Build and push Docker images through Github Actions
+  - push container images to github registry in addition to dockerhub
+- Documentation: 
+  - Add '206 not acceptable' to the Troubleshooting section
+  - Add mention to Shaarli Archiver
+  - doc: add note to adjust proxy timeouts or PHP max execution time
+  - doc: shaarli configuration: mention file:/// URIs 
+  - add "formatter" key to example config.json.php
+
+## Changed
+
+- docker latest: replace dev in shaarli_version.php with the latest commit
+- Daily RSS Cache: invalidate cache base on the date
+- Update Japanese translations
+- Update German translations
+- Templates: Inject current template name
+- format_date: include timezone in IntlDateFormatter object 
+- Handle pagination through BookmarkService
+- autocapitalize off for username input
+- More intuitive label for plugin checkboxes
+- Simple and uniform localized website title 
+- Use rewrited version of Netscape Bookmark Parser
+- tests/makefile: rewrite translate target to be compatible with busybox
+- PubSubHub Plugin: make 1 external call per request
+- Docker: 
+  - newer alpine (for newer PHP) and apk upgrade
+  - Dockerfile.armhf: upgrade python2 -> python3
+  - Dockerfile: add php8-gettext package
+  - update s6 service definition to use php-fpm8
+  - install php8-ldap in Docker images
+- CI: 
+  - use Github Action instead of Travis CI
+  - use the yarnpkg command instead of yarn 
+  - tools: github actions: fix PHP 8.0 tests
+  - github actions: add tests for PHP 8.2
+- Documentation: 
+  - apache: explicitely ste index.php as DirectoryIndex
+  - bookmarklet is now working on github.com
+  - LDAP login support, update php requirements list
+  - installation/tests: clarify build tools installation procedure
+  - doc: PHP extensions are also required for development
+  - doc: move OCI images hosting to ghcr.io
+
+## Fixed
+
+- Error handling if the datastore mutex is not working
+- Synchronous metadata retrieval is failing in strict mode
+- Improve metadata extraction
+- Typo: 'Authentication' -> 
+- default_colors plugin: update CSS file on color change
+- API: POST/PUT Link - properly parse tags string
+- Error when using bulk shaare with a single URL 
+- Bulk Shaare: 
+  - use unique HTML ID
+  - error with a single URL
+  - redirection with ending slash
+- Bug when trying to access ATOM feed without bookmarks
+- Documentation build
+- pubsubhubbub hub link in RSS / Atom.
+- Monthly views previous/next month links during month
+- Resolve PHP 8.1 deprecation warnings
+- Fix PHP 8 incompatibility with debug mode enabled
+- Fixed Roboto-Regular and Roboto-Bold font declarations
+- template/vintage: fix typo in visibility selection link
+- Do not display deprecated warnings by default
+- Fix a bug when using '/' as a tag separator
+- Fix Logger exception: gracefully handle permission issue
+- Documentation: 
+  - plugins.md: fix link casing
+
+## Removed
+
+- Daily RSS: Remove relative description (today, yesterday)
+- Documentation: 
+  - remove the markdown plugin from the plugins list 
+  - remove duplicate "general" key in example config.php.json
+
+## [v0.12.1](https://github.com/shaarli/Shaarli/releases/tag/v0.12.1) - 2020-11-12
 
 > nginx ([#1628](https://github.com/shaarli/Shaarli/pull/1628)) and Apache ([#1630](https://github.com/shaarli/Shaarli/pull/1630)) configurations have been reviewed. It is recommended that you
 > update yours using [the documentation](https://shaarli.readthedocs.io/en/master/Server-configuration/).
@@ -462,7 +606,7 @@ configuration to enable URL rewriting, see:
         - `/api/v1/info`: get general information on the Shaarli instance
         - `/api/v1/links`: get a list of shaared links
         - `/api/v1/history`: get a list of latest actions
-Theming:
+- Theming:
     - Introduce a new theme
     - Allow selecting themes/templates from the configuration page
     - New/Edit link form can be submitted using CTRL+Enter in the textarea

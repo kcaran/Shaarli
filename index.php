@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Shaarli - The personal, minimalist, super-fast, database free, bookmarking service.
+ * Shaarli - The personal, minimalist, super fast, database-free, bookmarking service.
  *
  * Friendly fork by the Shaarli community:
  *  - https://github.com/shaarli/Shaarli
@@ -59,7 +59,7 @@ if ($conf->get('dev.debug', false)) {
 }
 
 $logger = new Logger(
-    dirname($conf->get('resource.log')),
+    is_writable($conf->get('resource.log')) ? dirname($conf->get('resource.log')) : 'php://temp',
     !$conf->get('dev.debug') ? LogLevel::INFO : LogLevel::DEBUG,
     ['filename' => basename($conf->get('resource.log'))]
 );
@@ -81,7 +81,7 @@ if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
     autoLocale($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 }
 
-new Languages(setlocale(LC_MESSAGES, 0), $conf);
+new Languages(get_locale(LC_MESSAGES), $conf);
 
 $conf->setEmpty('general.timezone', date_default_timezone_get());
 $conf->setEmpty('general.title', t('Shared bookmarks on ') . escape(index_url($_SERVER)));
