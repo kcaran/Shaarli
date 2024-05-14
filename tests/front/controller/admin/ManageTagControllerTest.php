@@ -13,7 +13,6 @@ use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
 use Slim\Http\Request;
 use Slim\Http\Response;
-
 // These are declared for the bookmark service
 use malkusch\lock\mutex\NoMutex;
 use Shaarli\History;
@@ -56,8 +55,18 @@ class ManageTagControllerTest extends TestCase
         self::$refDB = new ReferenceLinkDB();
         self::$refDB->write(self::$testDatastore);
         $history = new History('sandbox/history.php');
-        $this->container->bookmarkService = new FakeBookmarkService($conf, static::$pluginManager, $history, $mutex, true);
-        $this->linkFilter = new BookmarkFilter($this->container->bookmarkService->getBookmarks(), $conf, static::$pluginManager);
+        $this->container->bookmarkService = new FakeBookmarkService(
+            $conf,
+            static::$pluginManager,
+            $history,
+            $mutex,
+            true
+        );
+        $this->linkFilter = new BookmarkFilter(
+            $this->container->bookmarkService->getBookmarks(),
+            $conf,
+            static::$pluginManager
+        );
     }
 
     /**
