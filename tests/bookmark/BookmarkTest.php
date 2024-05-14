@@ -397,6 +397,17 @@ class BookmarkTest extends TestCase
     }
 
     /**
+     * Test renameTag() avoid duplicating existing tag
+     */
+    public function testRenameTagNotDuplicated()
+    {
+        $bookmark = new Bookmark();
+        $bookmark->setTags(['tag1', 'tag2', 'chair']);
+        $bookmark->renameTag('tag1', 'chair');
+        $this->assertEquals(['tag2', 'chair'], $bookmark->getTags());
+    }
+
+    /**
      * Test deleteTag()
      */
     public function testDeleteTag()
