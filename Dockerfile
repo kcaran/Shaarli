@@ -16,7 +16,7 @@ RUN cd shaarli \
 
 # Stage 3:
 # - Frontend dependencies
-FROM docker.io/node:12-alpine as node
+FROM docker.io/node:18-alpine as node
 COPY --from=composer /app/shaarli shaarli
 RUN cd shaarli \
     && yarnpkg install \
@@ -25,11 +25,13 @@ RUN cd shaarli \
 
 # Stage 4:
 # - Shaarli image
-FROM docker.io/alpine:3.18.6
+FROM docker.io/alpine:3.19.4
 LABEL maintainer="Shaarli Community"
 
-RUN apk --update --no-cache add \
+RUN apk --no-cache del icu-data-en \
+    && apk --update --no-cache add \
         ca-certificates \
+        icu-data-full \
         nginx \
         php82 \
         php82-ctype \
