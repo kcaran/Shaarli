@@ -4,6 +4,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+------------------------
+
+## [v0.14.0](https://github.com/shaarli/Shaarli/releases/tag/v0.14.0) - 2024-12-08
+
+### Added
+
+* doc: add third party plugins clickcounter and targetblank by @waschinski in https://github.com/shaarli/Shaarli/pull/2063
+* doc: add shaarli-offen plugin to Community & related software by @waschinski in https://github.com/shaarli/Shaarli/pull/2064
+* doc: add Shaanti browser extension to Community & related software by @7Ds7 in https://github.com/shaarli/Shaarli/pull/2078
+* doc: add image-upload plugin to Community & related software by @bttrx in https://github.com/shaarli/Shaarli/pull/2097
+* doc: add shaarli2bluesky plugin to Community & related software by @kalvn in https://github.com/shaarli/Shaarli/pull/2111
+* doc: server configuration: allow accessing and caching SVG assets by @nodiscc in https://github.com/shaarli/Shaarli/pull/2074
+* doc: usage: document "Sticky" mode by @nodiscc in https://github.com/shaarli/Shaarli/pull/2055
+* doc: troubleshooting: add solution for `Allowed memory size of xxx bytes exhausted` by @nodiscc in https://github.com/shaarli/Shaarli/pull/2083
+* doc: usage: add opensearch/browser search engine integration instructions by @nodiscc in https://github.com/shaarli/Shaarli/pull/2096
+* doc: troubleshooting: list more cases in which title retrieval fails by @nodiscc in https://github.com/shaarli/Shaarli/pull/2060
+
+### Changed
+
+* frontend: improve QR code CSP compliance by @thican in https://github.com/shaarli/Shaarli/pull/2103
+* docker: update base alpine linux docker image to v3.19.4 by @nodiscc in https://github.com/shaarli/Shaarli/pull/2051, https://github.com/shaarli/Shaarli/pull/2054, https://github.com/shaarli/Shaarli/pull/2067, https://github.com/shaarli/Shaarli/pull/2088
+* github actions: don't attempt to push docker image from forks by @nodiscc in https://github.com/shaarli/Shaarli/pull/2043
+* doc: changelog: minor style tweaks/standardization/spacing by @nodiscc in https://github.com/shaarli/Shaarli/pull/2106
+* github actions: run daily trivy security scans on release docker image, composer/yarn dependencies by @nodiscc in https://github.com/shaarli/Shaarli/pull/2047
+
+### Fixed
+
+* PHP 8.x intl incompatibility: failback C locale with en_US by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/2044
+* fix description retrieval when page charset is not UTF-8 by @sokai in https://github.com/shaarli/Shaarli/pull/1992
+* fix metadata fetching for YouTube URLs by @puppe in https://github.com/shaarli/Shaarli/pull/2069
+* fix wrong date format when language is not english (Alpine icu package split) by @henschi in https://github.com/shaarli/Shaarli/pull/2102
+* doc: fix typos in special data example by @bttrx in https://github.com/shaarli/Shaarli/pull/2098
+* doc: fix broken link to 3rd party plugins by @BoboTiG in https://github.com/shaarli/Shaarli/pull/2059
+* ensure tags are unique when renaming by @kcaran in https://github.com/shaarli/Shaarli/pull/2086
+* doc: fix link to v0.13.0 release by @nodiscc in https://github.com/shaarli/Shaarli/pull/2107
+* tools: update trivy security scanner to v0.56.2 by @nodiscc in https://github.com/shaarli/Shaarli/pull/2070, https://github.com/shaarli/Shaarli/pull/2072, https://github.com/shaarli/Shaarli/pull/2089, https://github.com/shaarli/Shaarli/pull/2100
+
+### Removed
+
+* remove `updates.check_updates_branch` setting by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/1971
+* doc: Remove remaining references to `stable` branch by @ArthurHoaro in https://github.com/shaarli/Shaarli/pull/2042
+* doc: contributing: IRC no longer available @nodiscc in https://github.com/shaarli/Shaarli/pull/2082
+* doc: community and related software: remove urlextern plugin (archived project) by @nodiscc in https://github.com/shaarli/Shaarli/pull/2077
+
+### Security
+
+* frontend: update vulnerable npm dependencies (`npm audit fix`) by @kcaran in https://github.com/shaarli/Shaarli/pull/2087, @nodiscc in https://github.com/shaarli/Shaarli/pull/2056, https://github.com/shaarli/Shaarli/pull/2101
+
+**Full Changelog**: https://github.com/shaarli/Shaarli/compare/v0.13.0...v0.14.0
+
+------------------------
+
 ## [v0.13.0](https://github.com/shaarli/Shaarli/releases/tag/v0.13.0) - 2023-11-22
 
 > Major changes:

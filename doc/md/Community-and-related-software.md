@@ -29,6 +29,7 @@ See [REST API](REST-API.md) for a list of official and community clients.
 - [shaargem](https://forge.tourmentine.com/n/shaarli-plugin-shaargem) by [@n](https://forge.tourmentine.com/n): Allow to shaare gemini capsules.
 - [shaarli-descriptor](https://github.com/immanuelfodor/shaarli-descriptor) by [@immanuelfodor](https://github.com/immanuelfodor) - Customize the default height/number of rows of the Description field when editing a Shaare.
 - [shaarli2mastodon](https://github.com/kalvn/shaarli2mastodon) by [@kalvn](https://github.com/kalvn) - This Shaarli plugin allows you to automatically publish links you post on your Mastodon timeline.
+- [shaarli2bluesky](https://github.com/kalvn/shaarli2bluesky) by [@kalvn](https://github.com/kalvn) - Automatically post your links from Shaarli to Bluesky.
 - [shaarli2twitter](https://github.com/ArthurHoaro/shaarli2twitter) by [@ArthurHoaro](https://github.com/ArthurHoaro) - Automatically tweet your Shaares from Shaarli
 - [social](https://github.com/alexisju/social) by [@alexisju](https://github.com/alexisju): share links to social networks.
 - [targetblank](https://github.com/waschinski/shaarli-targetblank) by [@waschinski](https://github.com/waschinski): Shaarli plugin to open all external links in new tabs/windows

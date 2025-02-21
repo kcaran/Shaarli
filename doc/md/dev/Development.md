@@ -404,7 +404,7 @@ GitHub allows drafting the release notes for the upcoming release, from the [Rel
 - add a new section for the future unreleased version
 
 ```bash
-## [v0.x.y](https://github.com/shaarli/Shaarli/releases/tag/v0.x.y) - UNRELEASES
+## [v0.x.y](https://github.com/shaarli/Shaarli/releases/tag/v0.x.y) - UNRELEASED
 
 ### Added
 
@@ -424,12 +424,13 @@ GitHub allows drafting the release notes for the upcoming release, from the [Rel
 
 ```bash
 $ make generate_authors
-$ git commit -s -m "Update AUTHORS"
+$ git add AUTHORS
+$ git commit -m "doc: update AUTHORS"
 ```
 
 ### Create and merge a Pull Request
 
-Create a Pull Request to marge changes from your remote, into `master` in the community Shaarli repository, and have it merged.
+Create a Pull Request to merge changes from your remote, into `master` in the community Shaarli repository, and have it merged.
 
 
 ### Create the release branch and update shaarli_version.php
@@ -453,7 +454,7 @@ $ make test
 # Bump shaarli_version.php from dev to 0.x.0, **without the v**
 $ vim shaarli_version.php doc/conf.py README.md
 $ git add shaarli_version doc/conf.py README.md
-$ git commit -s -m "Bump Shaarli version to v0.x.0"
+$ git commit -m "bump Shaarli version to v0.x.0"
 $ git push upstream v0.x
 ```
 
